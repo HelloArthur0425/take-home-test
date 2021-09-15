@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import './Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container, Row, Col } from 'react-bootstrap';
