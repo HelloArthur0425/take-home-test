@@ -1,0 +1,14 @@
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid whitesmoke;
+    text-align: center;
+    font-size: 24px;
+}
+
+.logo-name {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: "Gill Sans", sans-serif;
+}
