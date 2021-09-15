@@ -18,3 +18,11 @@
 .card-image {
     object-fit: contain;
 }
+
+.main-posts-container-wrapper {
+    display: inline-grid;
+}
+
+.card-button {
+    margin: 5px;
+}

@@ -29,20 +29,22 @@ function App() {
             <div className="main-posts-container">
               {
                 posts.length > 0 ? 
-                <div className="main-posts-container-wrapper">
-                  {
-                    posts.map((post, index) => <div key={post.id}>
-                      <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={post.previewSrc} height="200" className="card-image"/>
-                        <Card.Body>
-                          <Card.Text>{post.content}</Card.Text>
-                          <Button variant="primary">Do somthing</Button>
-                        </Card.Body>
-                      </Card>
-                    </div>)
-                  }
-                </div>
-                  
+                  <div className="main-posts-container-wrapper">
+                    {
+                      posts.map((post, index) => <div key={post.id} style={{ margin: 5 }}>
+                        <Card style={{ width: '18rem' }}>
+                          {
+                            post.previewSrc && <Card.Img variant="top" src={post.previewSrc} height="200" className="card-image"/>
+                          }
+                          <Card.Body>
+                            <Card.Text>{post.content}</Card.Text>
+                            <Button variant="primary" className="card-button">Edit</Button>
+                            <Button variant="danger" className="card-button">Delete</Button>
+                          </Card.Body>
+                        </Card>
+                      </div>)
+                    }
+                  </div>
                   :
                   <div>No posts was created.</div>
               }

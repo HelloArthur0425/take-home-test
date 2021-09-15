@@ -8,18 +8,18 @@ const CreatePostModal = (props) => {
     let newPost = {};
 
     const previewRef = useRef(null);
-    const [previewSrc, setPreviewSrc] = useState();
+    const [previewSrc, setPreviewSrc] = useState(null);
     const [content, setContent] = useState('');
 
     const handleClose = () => {
         props.setShow(false);
-        setPreviewSrc();
+        setPreviewSrc(null);
         setContent('');
     }
 
     const createAPost = () => {
         newPost.id = uuidv4();
-        newPost.previewSrc = previewSrc[0];
+        newPost.previewSrc = previewSrc ? previewSrc[0] : null;
         newPost.content = content;
         props.setPosts([newPost, ...props.posts]);
         handleClose();
