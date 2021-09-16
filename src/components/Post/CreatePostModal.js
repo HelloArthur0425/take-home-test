@@ -68,9 +68,13 @@ const CreatePostModal = (props) => {
                     <Form.Control type="file" size="sm" onChange={(e) => handleFileChange(e.target.files[0])}/>
                 </Form.Group>
             </InputGroup>
-            <InputGroup>
-            <img src={previewSrc} width="300"/>
-            </InputGroup>
+            {
+                previewSrc && <InputGroup>
+                    <div className="previewSrc-container" style={{ margin: "5px 5px 20px" }}>
+                        <img src={previewSrc} width="400" style={previewSrc && { outline: "1px solid #ccc" }}/>
+                    </div>
+                </InputGroup>
+            }
             <InputGroup>
                 <FormControl as="textarea" aria-label="With textarea" 
                     value={content} placeholder="content here... " 

@@ -1,0 +1,14 @@
+#dropdown-custom-components::after {
+    content: '...';
+    cursor: pointer;
+    border: none;
+}
+
+#dropdown-custom-components:hover {
+    background-color: #ccc;
+    transition: .2s;
+}
+
+.dropdown {
+    text-align: right !important;
+}

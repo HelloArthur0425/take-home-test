@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Card } from 'react-bootstrap';
+import './Posts.css';
+import { Button, ButtonGroup, Card, Dropdown } from 'react-bootstrap';
 
 const Posts = (props) => {
 
@@ -23,12 +24,18 @@ const Posts = (props) => {
                 props.posts.map(post => <div key={post.id} style={{ margin: 5 }}>
                     <Card style={{ width: '18rem' }}>
                         {
-                            post.previewSrc && <Card.Img variant="top" src={post.previewSrc} height="200" className="card-image"/>
+                            post.previewSrc && <Card.Img variant="top" src={post.previewSrc} height="250" className="card-image"/>
                         }
                         <Card.Body>
                         <Card.Text>{post.content}</Card.Text>
-                        <Button variant="primary" className="card-button" onClick={() => handleEditPost(post)}>Edit</Button>
-                        <Button variant="danger" className="card-button" onClick={() => handleDeletePost(post)}>Delete</Button>
+                        <Dropdown>
+                            <Dropdown.Toggle as={ButtonGroup} id="dropdown-custom-components" />
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item eventKey="edit" onClick={() => handleEditPost(post)}>Edit</Dropdown.Item>
+                                <Dropdown.Item eventKey="delete" onClick={() => handleDeletePost(post)}>Delete</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                         </Card.Body>
                     </Card>
                 </div>)
