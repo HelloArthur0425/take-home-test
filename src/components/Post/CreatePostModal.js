@@ -42,7 +42,8 @@ const CreatePostModal = (props) => {
             tempPosts[postIndex] = newPost;
             props.setPosts(tempPosts);
         }
-        
+        setPreviewSrc(null);
+        setContent('');
         handleClose();
     }
 

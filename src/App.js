@@ -17,7 +17,7 @@ function App() {
   const [editingPost, setEditingPost] = useState(null);
 
   const openCreatePostyModal = (post) => {
-    setEditingPost(post)
+    setEditingPost(post);
     setShow(true);
   }
 
