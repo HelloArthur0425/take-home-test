@@ -10,6 +10,11 @@ const Posts = (props) => {
         props.setPosts(updatedPosts);
     }
 
+    const handleEditPost = (target) => {
+        props.setEditingPost(target);
+        props.setShow(true);
+    }
+
     return <div className="main-posts-container">
         {
         props.posts.length > 0 ? 
@@ -22,7 +27,7 @@ const Posts = (props) => {
                         }
                         <Card.Body>
                         <Card.Text>{post.content}</Card.Text>
-                        <Button variant="primary" className="card-button">Edit</Button>
+                        <Button variant="primary" className="card-button" onClick={() => handleEditPost(post)}>Edit</Button>
                         <Button variant="danger" className="card-button" onClick={() => handleDeletePost(post)}>Delete</Button>
                         </Card.Body>
                     </Card>

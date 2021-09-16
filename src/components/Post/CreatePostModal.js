@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,21 +7,42 @@ const CreatePostModal = (props) => {
 
     let newPost = {};
 
-    const previewRef = useRef(null);
     const [previewSrc, setPreviewSrc] = useState(null);
     const [content, setContent] = useState('');
 
+    useEffect(() => {
+        if (props.editingPost) {
+            setPreviewSrc(props.editingPost.previewSrc);
+            setContent(props.editingPost.content);
+        } else {
+            setPreviewSrc(null);
+            setContent('');
+        }
+    }, [props.editingPost]);
+
     const handleClose = () => {
         props.setShow(false);
-        setPreviewSrc(null);
-        setContent('');
     }
 
-    const createAPost = () => {
-        newPost.id = uuidv4();
-        newPost.previewSrc = previewSrc ? previewSrc[0] : null;
-        newPost.content = content;
-        props.setPosts([newPost, ...props.posts]);
+    const postService = () => {
+
+        if (!props.editingPost) {
+            // create new
+            newPost.id = uuidv4();
+            newPost.previewSrc = previewSrc ? previewSrc[0] : null;
+            newPost.content = content;
+            props.setPosts([newPost, ...props.posts]);
+        } else {
+            // update one
+            newPost.id = props.editingPost.id;
+            newPost.previewSrc = previewSrc ? previewSrc[0] : null;
+            newPost.content = content;
+            let postIndex = [...props.posts].findIndex(post => post.id == props.editingPost.id);
+            let tempPosts = [...props.posts];
+            tempPosts[postIndex] = newPost;
+            props.setPosts(tempPosts);
+        }
+        
         handleClose();
     }
 
@@ -37,7 +58,7 @@ const CreatePostModal = (props) => {
 
     return <Modal show={props.show} onHide={() => handleClose()} centered>
         <Modal.Header closeButton>
-            <Modal.Title>Create a new post</Modal.Title>
+            <Modal.Title>{!props.editingPost ? 'Create a new post' : 'Update the Post'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <InputGroup>
@@ -47,7 +68,7 @@ const CreatePostModal = (props) => {
                 </Form.Group>
             </InputGroup>
             <InputGroup>
-            <img ref={previewRef} src={previewSrc} width="300"/>
+            <img src={previewSrc} width="300"/>
             </InputGroup>
             <InputGroup>
                 <FormControl as="textarea" aria-label="With textarea" 
@@ -60,7 +81,7 @@ const CreatePostModal = (props) => {
             <Button variant="secondary" onClick={() => handleClose()}>
                 Cancel
             </Button>
-            <Button variant="primary" onClick={() => createAPost()}>
+            <Button variant="primary" onClick={() => postService()}>
                 Submit
             </Button>
         </Modal.Footer>

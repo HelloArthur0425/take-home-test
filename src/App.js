@@ -13,20 +13,27 @@ function App() {
   // modal use
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    console.log('posts:', posts);
-  }, [posts]);
+  // for editing
+  const [editingPost, setEditingPost] = useState(null);
+
+  const openCreatePostyModal = (post) => {
+    setEditingPost(post)
+    setShow(true);
+  }
 
   return (
     <div className="App">
       <Header />
       <Container fluid>
-        <CreatePostModal show={show} setShow={setShow} posts={posts} setPosts={setPosts}/>
+        <CreatePostModal show={show} setShow={setShow} 
+          editingPost={editingPost} setEditingPost={setEditingPost} 
+          posts={posts} setPosts={setPosts}
+        />
         <Row>
           <Col xs={12} md={12} lg={12}>
             <div className="main">
-              <Button variant="outline-primary" onClick={() => setShow(true)}>+ New Post</Button>
-              <Posts posts={posts} setPosts={setPosts}/>
+              <Button variant="outline-primary" onClick={() => openCreatePostyModal(null)}>+ New Post</Button>
+              <Posts posts={posts} setPosts={setPosts} setShow={setShow} setEditingPost={setEditingPost}/>
             </div>
           </Col>
         </Row>
