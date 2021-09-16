@@ -32,7 +32,7 @@ function App() {
         <Row>
           <Col xs={12} md={12} lg={12}>
             <div className="main">
-              <Button variant="outline-primary" onClick={() => openCreatePostyModal(null)}>+ New Post</Button>
+              <Button variant="outline-success" style={{  width: '18rem', marginBottom: 10 }} onClick={() => openCreatePostyModal(null)}>+ New Post</Button>
               <Posts posts={posts} setPosts={setPosts} setShow={setShow} setEditingPost={setEditingPost}/>
             </div>
           </Col>
