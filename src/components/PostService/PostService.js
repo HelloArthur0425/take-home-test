@@ -9,3 +9,12 @@ export const createPost = (media, content) => {
 
     return newPost;
 }
+
+export const createMediaPreview = (media, setMediaPreview, mediaDom) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(media);
+    reader.onloadend = function (e) {
+        setMediaPreview([reader.result]);
+        mediaDom.imageSrc = reader.result;
+    }.bind(this);
+}

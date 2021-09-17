@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { createPost } from '../PostService/PostService';
+import { createMediaPreview, createPost } from '../PostService/PostService';
 
 const PostModal = (props) => {
 
@@ -25,7 +25,7 @@ const PostModal = (props) => {
         props.setShow(false);
     }
 
-    const PostModal = () => {
+    const handlePostModalAction = () => {
 
         if (!props.editingPost) {
             // create new
@@ -47,13 +47,7 @@ const PostModal = (props) => {
     }
 
     const handleFileChange = (imageFile) => {
-        let file = imageFile;
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = function (e) {
-            setPreviewSrc([reader.result]);
-            post.imageSrc = reader.result;
-        }.bind(this);
+        createMediaPreview(imageFile, setPreviewSrc, post);
     }
 
     return <Modal show={props.show} onHide={() => handleClose()} centered>
@@ -64,7 +58,7 @@ const PostModal = (props) => {
             <InputGroup>
                 <Form.Group controlId="formFileSm" className="mb-3">
                     <Form.Label>Upload your image</Form.Label>
-                    <Form.Control type="file" size="sm" onChange={(e) => handleFileChange(e.target.files[0])}/>
+                    <input type="file" accept="image/*" style={{marginBottom: 5}} onChange={(e) => handleFileChange(e.target.files[0])} />
                 </Form.Group>
             </InputGroup>
             {
@@ -76,7 +70,7 @@ const PostModal = (props) => {
             }
             <InputGroup>
                 <FormControl as="textarea" aria-label="With textarea" 
-                    value={content} placeholder="content here... " 
+                    value={content} placeholder="content here..." 
                     onChange={(e) => setContent(e.target.value)}
                 />
             </InputGroup>
@@ -85,7 +79,7 @@ const PostModal = (props) => {
             <Button variant="secondary" onClick={() => handleClose()}>
                 Cancel
             </Button>
-            <Button variant="primary" onClick={() => PostModal()}>
+            <Button variant="primary" onClick={() => handlePostModalAction()}>
                 Submit
             </Button>
         </Modal.Footer>
