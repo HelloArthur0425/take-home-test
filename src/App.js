@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Header from './components/Header/Header';
-import CreatePostModal from './components/Post/CreatePostModal'; 
+import PostService from './components/Post/PostService'; 
 import Posts from './components/Post/Posts';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <Header />
       <Container fluid>
-        <CreatePostModal show={show} setShow={setShow} 
+        <PostService show={show} setShow={setShow} 
           editingPost={editingPost} setEditingPost={setEditingPost} 
           posts={posts} setPosts={setPosts}
         />

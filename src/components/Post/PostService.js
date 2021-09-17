@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
-const CreatePostModal = (props) => {
+const PostService = (props) => {
 
     let newPost = {};
 
@@ -93,4 +93,4 @@ const CreatePostModal = (props) => {
     </Modal>
 }
 
-export default CreatePostModal;
+export default PostService;
