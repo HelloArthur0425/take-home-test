@@ -2,10 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
+import { createPost } from '../PostService/PostService';
 
 const PostModal = (props) => {
 
-    let newPost = {};
+    let post = {};
 
     const [previewSrc, setPreviewSrc] = useState(null);
     const [content, setContent] = useState('');
@@ -28,18 +29,16 @@ const PostModal = (props) => {
 
         if (!props.editingPost) {
             // create new
-            newPost.id = uuidv4();
-            newPost.previewSrc = previewSrc ? previewSrc[0] : null;
-            newPost.content = content;
+            let newPost = createPost(previewSrc, content);
             props.setPosts([newPost, ...props.posts]);
         } else {
             // update one
-            newPost.id = props.editingPost.id;
-            newPost.previewSrc = previewSrc ? previewSrc[0] : null;
-            newPost.content = content;
+            post.id = props.editingPost.id;
+            post.previewSrc = previewSrc ? previewSrc[0] : null;
+            post.content = content;
             let postIndex = [...props.posts].findIndex(post => post.id == props.editingPost.id);
             let tempPosts = [...props.posts];
-            tempPosts[postIndex] = newPost;
+            tempPosts[postIndex] = post;
             props.setPosts(tempPosts);
         }
         setPreviewSrc(null);
@@ -53,7 +52,7 @@ const PostModal = (props) => {
         reader.readAsDataURL(file);
         reader.onloadend = function (e) {
             setPreviewSrc([reader.result]);
-            newPost.imageSrc = reader.result;
+            post.imageSrc = reader.result;
         }.bind(this);
     }
 

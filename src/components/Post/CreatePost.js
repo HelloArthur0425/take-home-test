@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Posts.css';
 import { Button, ButtonGroup, Card, Dropdown } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
+import { createPost } from '../PostService/PostService';
 
 const CreatePost = (props) => {
 
@@ -22,9 +23,7 @@ const CreatePost = (props) => {
     }
 
     const handlePublish = () => {
-        newPost.id = uuidv4();
-        newPost.previewSrc = previewSrc ? previewSrc[0] : null;
-        newPost.content = content;
+        let newPost = createPost(previewSrc, content);
         props.setPosts([newPost, ...props.posts]);
 
         // clear up
