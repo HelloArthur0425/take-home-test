@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
-const PostService = (props) => {
+const PostModal = (props) => {
 
     let newPost = {};
 
@@ -24,7 +24,7 @@ const PostService = (props) => {
         props.setShow(false);
     }
 
-    const postService = () => {
+    const PostModal = () => {
 
         if (!props.editingPost) {
             // create new
@@ -86,11 +86,11 @@ const PostService = (props) => {
             <Button variant="secondary" onClick={() => handleClose()}>
                 Cancel
             </Button>
-            <Button variant="primary" onClick={() => postService()}>
+            <Button variant="primary" onClick={() => PostModal()}>
                 Submit
             </Button>
         </Modal.Footer>
     </Modal>
 }
 
-export default PostService;
+export default PostModal;

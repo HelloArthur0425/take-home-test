@@ -27,3 +27,11 @@
 .card-button {
     margin: 5px;
 }
+
+.create-post {
+    display: block;
+}
+
+.m-create-post {
+    display: none;
+}
